@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="cvParent" type="id">cvParent</item>
+    <item name="ItemCvParent" type="id">ItemCvParent</item>
+    <item name="ItemTxtTanggal" type="id">ItemTxtTanggal</item>
+    <item name="ItemTxtHome" type="id">ItemTxtHome</item>
+    <item name="ItemTxtHomeScore" type="id">ItemTxtHome</item>
+    <item name="ItemTxtAwayScore" type="id">ItemTxtAwayScore</item>
+    <item name="ItemTxtAway" type="id">ItemTxtAway</item>
+    <item name="tabMain" type="id">tabMain</item>
+    <item name="viewPagerMain" type="id">viewPagerMain</item>
+    <item name="swipeRefresh" type="id">swipeRefresh</item>
+    <item name="rvScore" type="id">rvScore</item>
+    <item name="DetailIMGHome" type="id">DetailIMGHome</item>
+    <item name="detailTXTHome" type="id">detailTXTHome</item>
+    <item name="DetailIMGAway" type="id">DetailIMGAway</item>
+    <item name="detailTXTAway" type="id">detailTXTAway</item>
+    <item name="DetailItemTxtHomeScore" type="id">DetailItemTxtHomeScore</item>
+    <item name="DetailItemTxtAwayScore" type="id">DetailItemTxtHomeScore</item>
+    <item name="detailGoalAway" type="id">detailGoalAway</item>
+    <item name="detailGoalHome" type="id">detailGoalHome</item>
+    <item name="detailLUGKHome" type="id">detailLUGKHome</item>
+    <item name="detailLUGKDefendersHome" type="id">detailLUGKDefendersHome</item>
+    <item name="detailLUGKMildfielderHome" type="id">detailLUGKMildfielderHome</item>
+    <item name="detailLUGKForwardsHome" type="id">detailLUGKForwardsHome</item>
+    <item name="detailLUGKSubstituesHome" type="id">detailLUGKSubstituesHome</item>
+    <item name="detailLUGKAway" type="id">detailLUGKAway</item>
+    <item name="detailLUGKDefendersAway" type="id">detailLUGKDefendersAway</item>
+    <item name="detailLUGKMildfielderAway" type="id">detailLUGKMildfielderAway</item>
+    <item name="detailLUGKForwardsAway" type="id">detailLUGKForwardsAway</item>
+    <item name="detailLUGKSubstituesAway" type="id">detailLUGKSubstituesAway</item>
+    <item name="btnFavourite" type="id">btnFavourinte</item>
+</resources>
