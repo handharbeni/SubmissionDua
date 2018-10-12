@@ -16,13 +16,25 @@ import org.jetbrains.anko.uiThread
 
 class MainPresenter(private val view: MainView,
                     private val apiRepository: ApiRepository?,
-                    private val gson: Gson?,
-                    private val database: SqliteFavourite?) {
+                    private val gson: Gson?) {
 
     fun getFixturesList(state: String?) {
         view.showLoading()
         doAsync {
             val data = gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getFixtures(state)),
+                    Response::class.java
+            )
+            uiThread {
+                view.hideLoading()
+                view.showFixtures(data?.events)
+            }
+        }
+    }
+
+    fun getDetailFixtures(id: String?) {
+        view.showLoading()
+        doAsync {
+            val data = gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getFixturesDetail(id)),
                     Response::class.java
             )
             uiThread {
@@ -41,23 +53,6 @@ class MainPresenter(private val view: MainView,
             uiThread {
                 view.hideLoading()
                 view.showDetail(data?.teams, status)
-            }
-        }
-    }
-
-    fun getTeamFavourite(){
-        val rowParser = classParser<FavouriteTable>()
-        view.showLoading()
-        doAsync {
-            var data: List<FavouriteTable>? = null
-            database?.use{
-                select(FavouriteTable.TABLE_NAME).exec {
-                    data = parseList(rowParser).toList()
-                }
-            }
-            view.run {
-                hideLoading()
-                showFavourite(data)
             }
         }
     }

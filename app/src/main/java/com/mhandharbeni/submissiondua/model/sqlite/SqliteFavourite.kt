@@ -8,10 +8,11 @@ import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable.Companion.FIEL
 import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable.Companion.FIELD_SCORE_HOME
 import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable.Companion.FIELD_TITLE_AWAY
 import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable.Companion.FIELD_TITLE_HOME
+import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable.Companion.ID
 import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable.Companion.TABLE_NAME
 import org.jetbrains.anko.db.*
 
-class SqliteFavourite(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "SubmissionDuaDB", null, 3){
+class SqliteFavourite(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "SubmissionDuaDB", null, 1){
 
     companion object {
 
@@ -21,15 +22,16 @@ class SqliteFavourite(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "SubmissionDu
         @Synchronized
         fun getInstance(ctx: Context) : SqliteFavourite{
             if (instance == null){
-                instance = SqliteFavourite(ctx)
+                instance = SqliteFavourite(ctx.applicationContext)
             }
-            return instance!!
+            return instance as SqliteFavourite
         }
     }
 
-    override fun onCreate(db: SQLiteDatabase?) {
-        db?.createTable(TABLE_NAME, true,
-                FIELD_ID_FIXTURES to TEXT,
+    override fun onCreate(db: SQLiteDatabase) {
+        db.createTable(TABLE_NAME, true,
+                ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                FIELD_ID_FIXTURES to TEXT + UNIQUE,
                 FIELD_DATE_FIXTURES to TEXT,
                 FIELD_TITLE_HOME to TEXT,
                 FIELD_TITLE_AWAY to TEXT,
@@ -37,9 +39,7 @@ class SqliteFavourite(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "SubmissionDu
                 FIELD_SCORE_AWAY to TEXT)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.dropTable(TABLE_NAME, true)
-        onCreate(db)
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.dropTable(TABLE_NAME, true)
     }
-
 }

@@ -19,7 +19,10 @@ import com.mhandharbeni.submissiondua.model.sqlite.SqliteFavourite
 import com.mhandharbeni.submissiondua.presenter.MainPresenter
 import com.mhandharbeni.submissiondua.tools.MainView
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.db.classParser
+import org.jetbrains.anko.db.select
 import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.toast
@@ -48,23 +51,29 @@ class FragmentFavourite: Fragment(), MainView {
         rvScore = v.find(R.id.rvScore)
         swipeRefresh = v.find(R.id.swipeRefresh)
 
-        presenter = MainPresenter(this, null, null, database)
+        presenter = MainPresenter(this, null, null)
 
         adapter = FavouriteAdapter(listFavourite){partItem:FavouriteTable?->clickFixtures(partItem)}
         rvScore.adapter = adapter
 
+        showFavourite()
 
         swipeRefresh.onRefresh {
-            presenter.getTeamFavourite()
+            showFavourite()
         }
         return v
     }
 
 
-    override fun showFavourite(data: List<FavouriteTable>?) {
+    private fun showFavourite() {
         listFavourite.clear()
-        data?.let { listFavourite.addAll(it) }
-        adapter.notifyDataSetChanged()
+        database?.use {
+            swipeRefresh.isRefreshing = false
+            val result = select(FavouriteTable.TABLE_NAME)
+            val favorite = result.parseList(classParser<FavouriteTable>())
+            listFavourite.addAll(favorite)
+            adapter.notifyDataSetChanged()
+        }
     }
 
     override fun showLoading() {
@@ -83,8 +92,11 @@ class FragmentFavourite: Fragment(), MainView {
     }
 
     private fun clickFixtures(favourite: FavouriteTable?){
-//        toast("Pertandingan Belum Berlangsung!!")
-        val intent = DetailActivity.newIntent(ctx, favourite)
-        ctx.startActivity(intent)
+        ctx.startActivity<DetailActivity>("id" to favourite?.idFixtures)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showFavourite()
     }
 }
