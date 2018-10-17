@@ -2,6 +2,7 @@ package com.mhandharbeni.submissiondua
 
 import android.content.Context
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
@@ -23,8 +24,6 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
 class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
-    override fun showFavourite(data: List<FavouriteTable>?) {
-    }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
         when (status) {
@@ -44,26 +43,19 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
     }
 
     override fun showFixtures(data: List<EventsItem>?) {
-    }
+        eventsItem = EventsItem(data?.get(0)?.intHomeShots, data?.get(0)?.strSport, data?.get(0)?.strHomeLineupDefense, data?.get(0)?.strAwayLineupSubstitutes,
+                data?.get(0)?.idLeague, data?.get(0)?.idSoccerXML, data?.get(0)?.strHomeLineupForward, data?.get(0)?.strTVStation,
+                data?.get(0)?.strHomeGoalDetails, data?.get(0)?.strAwayLineupGoalkeeper, data?.get(0)?.strAwayLineupMid, data?.get(0)?.idEvent,
+                data?.get(0)?.intRound, data?.get(0)?.strHomeYellowCards, data?.get(0)?.idHomeTeam, data?.get(0)?.intHomeScore, data?.get(0)?.dateEvent,
+                data?.get(0)?.strCountry, data?.get(0)?.strAwayTeam, data?.get(0)?.strHomeLineupMidfield, data?.get(0)?.strDate, data?.get(0)?.strHomeFormation,
+                data?.get(0)?.strMap, data?.get(0)?.idAwayTeam, data?.get(0)?.strAwayRedCards, data?.get(0)?.strBanner, data?.get(0)?.strFanart,
+                data?.get(0)?.strDescriptionEN, data?.get(0)?.strResult, data?.get(0)?.strCircuit, data?.get(0)?.intAwayShots, data?.get(0)?.strFilename, data?.get(0)?.strTime,
+                data?.get(0)?.strAwayGoalDetails, data?.get(0)?.strAwayLineupForward, data?.get(0)?.strLocked, data?.get(0)?.strSeason, data?.get(0)?.intSpectators,
+                data?.get(0)?.strHomeRedCards, data?.get(0)?.strHomeLineupGoalkeeper, data?.get(0)?.strHomeLineupSubstitutes, data?.get(0)?.strAwayFormation, data?.get(0)?.strEvent,
+                data?.get(0)?.strAwayYellowCards, data?.get(0)?.strAwayLineupDefense, data?.get(0)?.strHomeTeam, data?.get(0)?.strThumb, data?.get(0)?.strLeague,
+                data?.get(0)?.intAwayScore, data?.get(0)?.strCity, data?.get(0)?.strPoster)
 
-    companion object {
-
-        fun newIntent(context: Context, eventsItem: EventsItem?): Intent {
-            val intent = Intent(context, DetailActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelable("selectedFixtures", eventsItem)
-            intent.putExtra("DetailBundle", bundle)
-            intent.putExtra("From", "API")
-            return intent
-        }
-        fun newIntent(context: Context, favourite: FavouriteTable?):Intent{
-            val intent = Intent(context, DetailActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelable("selectedFixtures", favourite)
-            intent.putExtra("DetailBundle", bundle)
-            intent.putExtra("From", "SQL")
-            return intent
-        }
+        initDataFromEvent(eventsItem)
     }
 
     private val Context.database : SqliteFavourite get() = SqliteFavourite.getInstance(applicationContext)
@@ -71,6 +63,9 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
     private lateinit var request: ApiRepository
     private lateinit var gson: Gson
     private var presenter: MainPresenter? = null
+
+    private lateinit var idEvent:String
+    private var isFav: Boolean = false
 
     private lateinit var detailImageHome: ImageView
     private lateinit var detailImageAway: ImageView
@@ -96,8 +91,6 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
 
     private lateinit var btnFavourite: FloatingActionButton
 
-    private lateinit var from: String
-    private lateinit var bundle: Bundle
     private lateinit var eventsItem: EventsItem
     private lateinit var favourite: FavouriteTable
 
@@ -106,30 +99,18 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
         super.onCreate(savedInstanceState)
         DetailActivityUI<DetailActivity>().setContentView(this)
         initView()
-
-        initBundle()
         initModule()
-
         getFavourite()
-    }
-
-    private fun initBundle(){
-        from = intent.getStringExtra("From")
-        bundle = intent.getBundleExtra("DetailBundle")
-        if (from.equals("API", true)){
-            eventsItem= bundle.getParcelable("selectedFixtures") as EventsItem
-            initDataFromEvent()
-        }else if(from.equals("SQL", true)){
-            favourite = bundle.getParcelable("selectedFixtures") as FavouriteTable
-            initDataFromFavourite()
-        }
     }
 
     private fun initModule(){
         request = ApiRepository()
         gson = Gson()
 
-        presenter = MainPresenter(this, request, gson, database)
+        idEvent = intent.getStringExtra("id")
+
+        presenter = MainPresenter(this, request, gson)
+        presenter?.getDetailFixtures(idEvent)
     }
 
     private fun initView(){
@@ -163,12 +144,17 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
             clickFavourite()
         }
     }
-    private fun initDataFromEvent(){
+    private fun initDataFromEvent(eventsItem: EventsItem){
         detailTxtHome.text = eventsItem.strHomeTeam
         detailTxtAway.text = eventsItem.strAwayTeam
 
-        detailTxtItemHomeScore.text = eventsItem.intHomeScore.toString()
-        detailTxtItemAwayScore.text = eventsItem.intAwayScore.toString()
+        if (!eventsItem.intHomeScore.isNullOrEmpty()){
+            detailTxtItemHomeScore.text = eventsItem.intHomeScore.toString()
+            detailTxtItemAwayScore.text = eventsItem.intAwayScore.toString()
+        } else {
+            detailTxtItemHomeScore.text = ""
+            detailTxtItemAwayScore.text = ""
+        }
 
         detailGoalHome.text = eventsItem.strHomeGoalDetails?.replace(";", "\n")
         detailGoalAway.text = eventsItem.strAwayGoalDetails?.replace(";", "\n")
@@ -184,7 +170,6 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
         detailLUGKMildfielderAway.text = eventsItem.strAwayLineupMid?.replace(";", "\n")
         detailLUGKForwardsAway.text = eventsItem.strAwayLineupForward?.replace(";", "\n")
         detailLUGKSubstituesAway.text = eventsItem.strAwayLineupSubstitutes?.replace(";", "\n")
-
         getHomeTeam()
         getAwayTeam()
 
@@ -209,65 +194,57 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
     }
 
     private fun getFavourite(){
-        if (getColumnCount(true)>0){
+        if (favoriteState()){
             btnFavourite.setImageResource(R.drawable.ic_favourite)
         }else{
             btnFavourite.setImageResource(R.drawable.ic_unfavourite)
         }
     }
-    private var countColumn = 0
-    private fun getColumnCount(byId: Boolean) :Int{
-        val rowParser = classParser<FavouriteTable>()
-        database.use {
-            if (byId){
-                select(FavouriteTable.TABLE_NAME)
-                        .whereArgs("${FavouriteTable.FIELD_ID_FIXTURES} = {idFixtures}",
-                                "idFixtures" to "${eventsItem.idEvent}").exec {
-                            countColumn = parseList(
-                                    rowParser
-                            ).count()
-                        }
-            }else{
-                select(FavouriteTable.TABLE_NAME)
-                        .exec {
-                            countColumn = parseList(
-                                    rowParser
-                            ).count()
-                        }
-            }
-        }
-        return countColumn
-    }
-    var id: Int = 0
+
     private fun clickFavourite(){
-        id = getColumnCount(false)+1
-        if (getColumnCount(true) > 0){
+        if (isFav)
             setUnFavourite()
-        }else{
+        else
             setFavourite()
-        }
+        isFav = !isFav
         getFavourite()
     }
 
-    private fun setFavourite() {
-        /*insert*/
+    private fun favoriteState():Boolean{
         database.use {
-            insert(FavouriteTable.TABLE_NAME,
-                    FavouriteTable.FIELD_ID_FIXTURES to "${eventsItem.idEvent}",
-                    FavouriteTable.FIELD_DATE_FIXTURES to "${eventsItem.strDate}",
-                    FavouriteTable.FIELD_TITLE_HOME to "${eventsItem.strHomeTeam}",
-                    FavouriteTable.FIELD_TITLE_AWAY to "${eventsItem.strAwayTeam}",
-                    FavouriteTable.FIELD_SCORE_HOME to "${eventsItem.intHomeScore}",
-                    FavouriteTable.FIELD_SCORE_AWAY to "${eventsItem.intAwayScore}" )
+            val result = select(FavouriteTable.TABLE_NAME)
+                    .whereArgs("(ID_FIXTURES = {id})",
+                            "id" to idEvent)
+            val favorite = result.parseList(classParser<FavouriteTable>())
+            if (!favorite.isEmpty())
+                isFav = true
+        }
+        return isFav
+    }
+
+    private fun setFavourite() {
+        try {
+            database.use {
+                insert(FavouriteTable.TABLE_NAME,
+                        FavouriteTable.FIELD_ID_FIXTURES to "${eventsItem.idEvent}",
+                        FavouriteTable.FIELD_DATE_FIXTURES to "${eventsItem.strDate}",
+                        FavouriteTable.FIELD_TITLE_HOME to "${eventsItem.strHomeTeam}",
+                        FavouriteTable.FIELD_TITLE_AWAY to "${eventsItem.strAwayTeam}",
+                        FavouriteTable.FIELD_SCORE_HOME to "${eventsItem.intHomeScore}",
+                        FavouriteTable.FIELD_SCORE_AWAY to "${eventsItem.intAwayScore}" )
+            }
+        } catch (e: SQLiteConstraintException){
+
         }
     }
 
     private fun setUnFavourite(){
-        /*delete*/
-        database.use {
-            return@use delete(FavouriteTable.TABLE_NAME,
-                    "${FavouriteTable.FIELD_ID_FIXTURES} = {idDelete}",
-                    "idDelete" to "${eventsItem.idEvent}")
+        try {
+            database.use {
+                delete(FavouriteTable.TABLE_NAME, "(ID_FIXTURES = {id})", "id" to idEvent)
+            }
+        } catch (e: SQLiteConstraintException){
+
         }
     }
 }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.gson.Gson
 import com.mhandharbeni.submissiondua.BuildConfig
+import com.mhandharbeni.submissiondua.DetailActivity
 import com.mhandharbeni.submissiondua.R
 import com.mhandharbeni.submissiondua.adapter.MainAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentUI
@@ -20,13 +21,12 @@ import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.toast
 
 class FragmentNext: Fragment(), MainView {
-    override fun showFavourite(data: List<FavouriteTable>?) {
-    }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
     }
@@ -52,7 +52,7 @@ class FragmentNext: Fragment(), MainView {
 
         request = ApiRepository()
         gson = Gson()
-        presenter = MainPresenter(this, request, gson, null)
+        presenter = MainPresenter(this, request, gson)
 
         adapter = MainAdapter(listFixtures){partItem:EventsItem?->clickFixtures(partItem)}
         rvScore.adapter = adapter
@@ -89,7 +89,6 @@ class FragmentNext: Fragment(), MainView {
     }
     private fun clickFixtures(eventsItem: EventsItem?){
         toast("Pertandingan Belum Berlangsung!!")
-//        val intent = DetailActivity.newIntent(ctx, eventsItem)
-//        ctx.startActivity(intent)
+        ctx.startActivity<DetailActivity>("id" to eventsItem?.idEvent)
     }
 }

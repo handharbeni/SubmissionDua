@@ -21,12 +21,11 @@ import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
 class FragmentPrevious: Fragment(), MainView {
-    override fun showFavourite(data: List<FavouriteTable>?) {
-    }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
     }
@@ -53,7 +52,7 @@ class FragmentPrevious: Fragment(), MainView {
 
         request = ApiRepository()
         gson = Gson()
-        presenter = MainPresenter(this, request, gson, null)
+        presenter = MainPresenter(this, request, gson)
 
 //        adapter = MainAdapter(listFixtures)
         adapter = MainAdapter(listFixtures){partItem:EventsItem?->clickFixtures(partItem)}
@@ -86,8 +85,7 @@ class FragmentPrevious: Fragment(), MainView {
 
     }
     private fun clickFixtures(eventsItem: EventsItem?){
-        val intent = DetailActivity.newIntent(ctx, eventsItem)
-        ctx.startActivity(intent)
+        ctx.startActivity<DetailActivity>("id" to eventsItem?.idEvent)
     }
 }
 

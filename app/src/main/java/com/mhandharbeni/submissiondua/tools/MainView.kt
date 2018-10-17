@@ -9,5 +9,4 @@ interface MainView {
     fun hideLoading()
     fun showFixtures(data: List<EventsItem>?)
     fun showDetail(data: List<TeamsItem>?, status: String)
-    fun showFavourite(data: List<FavouriteTable>?)
 }

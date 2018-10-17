@@ -38,8 +38,13 @@ class FavouriteTeamViewHolder(view: View) : RecyclerView.ViewHolder(view){
         ItemTxtTanggal.text = teams?.date
         ItemTxtHome.text = teams?.titleHome
         ItemTxtAway.text = teams?.titleAway
-        ItemTxtHomeScore.text = teams?.scoreHome
-        ItemTxtAwayScore.text = teams?.scoreAway
+        if (!teams?.scoreHome.equals("null")){
+            ItemTxtHomeScore.text = teams?.scoreHome
+            ItemTxtAwayScore.text = teams?.scoreAway
+        } else {
+            ItemTxtHomeScore.text = ""
+            ItemTxtAwayScore.text = ""
+        }
         ItemCvParent.setOnClickListener {
             clickListener(teams)
         }
