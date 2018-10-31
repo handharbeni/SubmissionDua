@@ -8,5 +8,6 @@ interface MainView {
     fun showLoading()
     fun hideLoading()
     fun showFixtures(data: List<EventsItem>?)
+    fun showLastFixtures(data: List<EventsItem>?)
     fun showDetail(data: List<TeamsItem>?, status: String)
 }

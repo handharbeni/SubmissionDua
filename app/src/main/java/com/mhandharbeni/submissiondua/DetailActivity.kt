@@ -24,6 +24,9 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
 class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
+    override fun showLastFixtures(data: List<EventsItem>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
         when (status) {

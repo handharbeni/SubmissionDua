@@ -12,10 +12,10 @@ import com.mhandharbeni.submissiondua.BuildConfig
 import com.mhandharbeni.submissiondua.DetailActivity
 import com.mhandharbeni.submissiondua.R
 import com.mhandharbeni.submissiondua.adapter.MainAdapter
+import com.mhandharbeni.submissiondua.fragment.ui.FragmentPreviousUI
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentUI
 import com.mhandharbeni.submissiondua.model.EventsItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
-import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import com.mhandharbeni.submissiondua.presenter.MainPresenter
 import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
@@ -26,6 +26,9 @@ import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
 class FragmentPrevious: Fragment(), MainView {
+    override fun showLastFixtures(data: List<EventsItem>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
     }
@@ -44,9 +47,9 @@ class FragmentPrevious: Fragment(), MainView {
     private lateinit var gson: Gson
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        v = FragmentUI<FragmentPrevious>().createView(AnkoContext.create(ctx, this))
+        v = FragmentPreviousUI<FragmentPrevious>().createView(AnkoContext.create(ctx, this))
 
-        rvScore = v.find(R.id.rvScore)
+        rvScore = v.find(R.id.rvScorePrevious)
 //        progressBar = v.find(R.id.progressBar)
         swipeRefresh = v.find(R.id.swipeRefresh)
 

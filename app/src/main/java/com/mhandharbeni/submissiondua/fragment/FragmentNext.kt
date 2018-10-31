@@ -27,6 +27,9 @@ import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.toast
 
 class FragmentNext: Fragment(), MainView {
+    override fun showLastFixtures(data: List<EventsItem>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
     }

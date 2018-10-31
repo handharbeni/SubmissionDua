@@ -29,4 +29,6 @@
     <item name="detailLUGKForwardsAway" type="id" />
     <item name="detailLUGKSubstituesAway" type="id" />
     <item name="btnFavourite" type="id" />
+    <item name="rvScorePrevious" type="id" />
+    <item name="rvScoreFavourite" type="id" />
 </resources>
