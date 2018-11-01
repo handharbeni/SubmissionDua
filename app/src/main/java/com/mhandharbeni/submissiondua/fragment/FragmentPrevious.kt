@@ -15,6 +15,7 @@ import com.mhandharbeni.submissiondua.adapter.MainAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentPreviousUI
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentUI
 import com.mhandharbeni.submissiondua.model.EventsItem
+import com.mhandharbeni.submissiondua.model.PlayerItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
 import com.mhandharbeni.submissiondua.presenter.MainPresenter
 import com.mhandharbeni.submissiondua.tools.ApiRepository
@@ -26,6 +27,14 @@ import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 
 class FragmentPrevious: Fragment(), MainView {
+    override fun showTeams(data: List<TeamsItem>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showPlayer(data: List<PlayerItem>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun showLastFixtures(data: List<EventsItem>?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

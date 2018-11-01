@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.gson.Gson
 import com.mhandharbeni.submissiondua.model.EventsItem
+import com.mhandharbeni.submissiondua.model.PlayerItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
 import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import com.mhandharbeni.submissiondua.model.sqlite.SqliteFavourite
@@ -24,6 +25,14 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 
 
 class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
+    override fun showTeams(data: List<TeamsItem>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showPlayer(data: List<PlayerItem>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun showLastFixtures(data: List<EventsItem>?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -1,8 +1,10 @@
 package com.mhandharbeni.submissiondua.presenter
 
 import com.google.gson.Gson
+import com.mhandharbeni.submissiondua.model.PlayerResponse
 import com.mhandharbeni.submissiondua.model.Response
 import com.mhandharbeni.submissiondua.model.TeamDetail
+import com.mhandharbeni.submissiondua.model.TeamResponse
 import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import com.mhandharbeni.submissiondua.model.sqlite.SqliteFavourite
 import com.mhandharbeni.submissiondua.tools.ApiRepository
@@ -61,11 +63,71 @@ class MainPresenter(private val view: MainView,
         view.showLoading()
         async(context.main) {
             val data = bg {
-                gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeamDetail(id)), Response::class.java)
+                gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeamDetail(id)), TeamResponse::class.java)
+            }
+
+            view.hideLoading()
+            view.showTeams(data.await()?.teams)
+        }
+    }
+
+    fun getTeam(liga: String?){
+        view.showLoading()
+        async(context.main) {
+            val data = bg {
+                gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeam(liga)), TeamResponse::class.java)
+            }
+
+            view.hideLoading()
+            view.showTeams(data.await()?.teams)
+        }
+    }
+
+    fun getDetailTeam(id: String?){
+        view.showLoading()
+        async(context.main) {
+            val data = bg {
+                gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeamDetail(id)), TeamResponse::class.java)
+            }
+
+            view.hideLoading()
+            view.showTeams(data.await()?.teams)
+        }
+    }
+
+    fun getPlayer(team: String?){
+        view.showLoading()
+        async(context.main) {
+            val data = bg {
+                gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getPlayer(team)), PlayerResponse::class.java)
+            }
+
+            view.hideLoading()
+            view.showPlayer(data.await()?.player)
+        }
+    }
+
+    fun getFixturesSearch(search: String?){
+        view.showLoading()
+        async(context.main) {
+            val data = bg {
+                gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getFixturesSearch(search)), Response::class.java)
             }
 
             view.hideLoading()
             view.showFixtures(data.await()?.events)
+        }
+    }
+
+    fun getTeamSearch(search: String?){
+        view.showLoading()
+        async(context.main) {
+            val data = bg {
+                gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeamSearch(search)), TeamResponse::class.java)
+            }
+
+            view.hideLoading()
+            view.showTeams(data.await()?.teams)
         }
     }
 }

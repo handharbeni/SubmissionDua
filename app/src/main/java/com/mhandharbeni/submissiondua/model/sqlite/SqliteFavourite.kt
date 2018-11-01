@@ -37,9 +37,20 @@ class SqliteFavourite(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "SubmissionDu
                 FIELD_TITLE_AWAY to TEXT,
                 FIELD_SCORE_HOME to TEXT,
                 FIELD_SCORE_AWAY to TEXT)
+
+        db.createTable(TeamFavouriteTable.TABLE_NAME, true,
+                TeamFavouriteTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                TeamFavouriteTable.FIELD_ID_TEAM to TEXT + UNIQUE,
+                TeamFavouriteTable.FIELD_TITLE_TEAM to TEXT,
+                TeamFavouriteTable.FIELD_LOGO_TEAM to TEXT,
+                TeamFavouriteTable.FIELD_FORMED_YEAR to TEXT,
+                TeamFavouriteTable.FIELD_STADIUM to TEXT,
+                TeamFavouriteTable.FIELD_DESKRIPSI to TEXT)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.dropTable(TABLE_NAME, true)
+        db.dropTable(TeamFavouriteTable.TABLE_NAME, true)
+
     }
 }

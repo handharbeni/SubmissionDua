@@ -44,7 +44,7 @@ object TheSportDBApi {
 //                .toString()
     }
     fun getTeamDetail(id: String?): String{
-        return "https://www.thesportsdb.com/api/v1/json/1/lookupteam.php/?id=$id";
+        return "https://www.thesportsdb.com/api/v1/json/1/lookupteam.php/?id=$id"
 //        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
 //                .appendPath("api")
 //                .appendPath("v1")
@@ -54,5 +54,21 @@ object TheSportDBApi {
 //                .appendQueryParameter("id", id)
 //                .build()
 //                .toString()
+    }
+
+    fun getTeam(liga:String?):String{
+        return "https://www.thesportsdb.com/api/v1/json/1/search_all_teams.php?l=$liga"
+    }
+
+    fun getPlayer(id:String?):String{
+        return "https://www.thesportsdb.com/api/v1/json/1/lookup_all_players.php?id=$id"
+    }
+
+    fun getFixturesSearch(fixture:String?):String{
+        return "https://www.thesportsdb.com/api/v1/json/1/searchevents.php?e=$fixture"
+    }
+
+    fun getTeamSearch(team:String?):String{
+        return "https://www.thesportsdb.com/api/v1/json/1/searchteams.php?t=$team"
     }
 }

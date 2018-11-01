@@ -31,4 +31,18 @@
     <item name="btnFavourite" type="id" />
     <item name="rvScorePrevious" type="id" />
     <item name="rvScoreFavourite" type="id" />
+    <item name="frameLayout" type="id" />
+    <item name="navigation" type="id" />
+    <item name="rvTeam" type="id" />
+    <item name="ItemTxtNama" type="id" />
+    <item name="ItemIvLogo" type="id" />
+    <item name="spinner" type="id" />
+    <item name="ivLogoTeam" type="id" />
+    <item name="ItemTxtTahun" type="id" />
+    <item name="ItemTxtStadium" type="id" />
+    <item name="tabs" type="id" />
+    <item name="viewPager" type="id" />
+    <item name="frameTeam" type="id" />
+    <item name="tabTeam" type="id" />
+    <item name="txtOverview" type="id" />
 </resources>
