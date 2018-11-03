@@ -33,7 +33,7 @@ class MainPresenterTest {
     }
 
     @Test
-    fun getEventList(){
+    fun getMatchList(){
         val events:MutableList<EventsItem> = mutableListOf()
         val response = Response(events)
         `when`(gson.fromJson(apiRepository.doRequest(TheSportDBApi.getFixtures(BuildConfig.NEXT)),
