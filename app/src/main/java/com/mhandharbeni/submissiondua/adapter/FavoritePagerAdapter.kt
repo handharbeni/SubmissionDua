@@ -4,16 +4,14 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.mhandharbeni.submissiondua.fragment.FragmentFavourite
-import com.mhandharbeni.submissiondua.fragment.FragmentNext
-import com.mhandharbeni.submissiondua.fragment.FragmentPrevious
+import com.mhandharbeni.submissiondua.fragment.FragmentTeamFavourite
 
-class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class FavoritePagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0       -> FragmentPrevious()
-            else       -> FragmentNext()
-//            else    -> FragmentFavourite()
+            0       -> FragmentFavourite()
+            else       -> FragmentTeamFavourite()
         }
     }
 
@@ -23,9 +21,8 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
-            0       -> "Previous Fixtures"
-            else       -> "Next Fixtures"
-//            else    -> "Favourite Fixtures"
+            0       -> "Match Favorite"
+            else       -> "Team Favorite"
         }
     }
 }
