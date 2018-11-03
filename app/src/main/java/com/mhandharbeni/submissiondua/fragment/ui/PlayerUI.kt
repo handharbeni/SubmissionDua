@@ -6,12 +6,12 @@ import com.mhandharbeni.submissiondua.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.cardview.v7.cardView
 
-class TeamUI<T> : AnkoComponent<T> {
+class PlayerUI<T> : AnkoComponent<T> {
     override fun createView(ui: AnkoContext<T>) = with(ui) {
         cardView {
             lparams(width = matchParent, height = wrapContent){
-                margin = dip(10)
-                padding = dip(15)
+                margin = dip(8)
+                padding = dip(8)
             }
             id = R.id.ItemCvParent
             linearLayout {
@@ -23,7 +23,7 @@ class TeamUI<T> : AnkoComponent<T> {
                     height = dip(80)
                     padding = dip(8)
                 }
-                textView("NAMA TEAM") {
+                textView("NAMA PLAYER") {
                     id = R.id.ItemTxtNama
                     gravity = Gravity.CENTER_VERTICAL
                     textColor = R.color.colorAccent

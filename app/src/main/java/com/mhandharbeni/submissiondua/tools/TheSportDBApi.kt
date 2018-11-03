@@ -5,8 +5,8 @@ import com.mhandharbeni.submissiondua.BuildConfig
 
 
 object TheSportDBApi {
-    fun getFixtures(state: String?): String {
-        return "https://www.thesportsdb.com/api/v1/json/1/$state?id=4328"
+    fun getFixtures(state: String?, league: String?): String {
+        return "https://www.thesportsdb.com/api/v1/json/1/$state?id=$league"
 
 //        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
 //                .appendPath("api")
@@ -18,8 +18,8 @@ object TheSportDBApi {
 //                .build()
 //                .toString()
     }
-    fun getlastFixtures(state: String?): String {
-        return "https://www.thesportsdb.com/api/v1/json/1/$state?id=4328"
+    fun getlastFixtures(state: String?, league: String?): String {
+        return "https://www.thesportsdb.com/api/v1/json/1/$state?id=$league"
 
 //        return Uri.parse(BuildConfig.BASE_URL).buildUpon()
 //                .appendPath("api")

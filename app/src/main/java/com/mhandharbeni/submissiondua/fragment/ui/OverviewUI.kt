@@ -14,7 +14,9 @@ class OverviewUI<T> : AnkoComponent<T> {
             nestedScrollView {
                 textView {
                     id = R.id.txtOverview
-                }.lparams(matchParent, wrapContent)
+                }.lparams(matchParent, wrapContent){
+                    margin = dip(8)
+                }
             }.lparams(matchParent, wrapContent)
         }
     }

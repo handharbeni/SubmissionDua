@@ -82,7 +82,8 @@ class DetailTeamActivity : AppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DetailTeamActivityUI<DetailTeamActivity>().setContentView(this)
+//        DetailTeamActivityUI<DetailTeamActivity>().setContentView(this)
+        setContentView(R.layout.activity_team_detail)
         initModule()
         initView()
         getFavourite()

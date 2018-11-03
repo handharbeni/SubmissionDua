@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.mhandharbeni.submissiondua.R
-import com.mhandharbeni.submissiondua.fragment.ui.FixtureUI
 import com.mhandharbeni.submissiondua.fragment.ui.TeamUI
 import com.mhandharbeni.submissiondua.model.TeamsItem
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.find
+import org.jetbrains.anko.info
 
-class TeamAdapter (private val teams: List<TeamsItem>, private val clickListener: (TeamsItem?) -> Unit) : RecyclerView.Adapter<ViewHolder>(){
+class TeamAdapter (private val teams: List<TeamsItem>, private val clickListener: (TeamsItem?) -> Unit) : RecyclerView.Adapter<ViewHolder>(), AnkoLogger{
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(TeamUI<ViewGroup>().createView(AnkoContext.create(parent.context, parent)))
     }

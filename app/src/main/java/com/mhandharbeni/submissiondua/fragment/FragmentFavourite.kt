@@ -95,10 +95,6 @@ class FragmentFavourite: Fragment(), MainView {
             swipeRefresh.isRefreshing = true
         }
     }
-    override fun onStart() {
-        super.onStart()
-        presenter.getFixturesList(BuildConfig.NEXT)
-    }
     override fun hideLoading() {
         swipeRefresh.handler.post {
             swipeRefresh.isRefreshing = false
@@ -113,4 +109,5 @@ class FragmentFavourite: Fragment(), MainView {
         super.onResume()
         showFavourite()
     }
+
 }

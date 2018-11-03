@@ -9,11 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.Spinner
 import com.google.gson.Gson
-import com.mhandharbeni.submissiondua.DetailActivity
-import com.mhandharbeni.submissiondua.DetailTeamActivity
-import com.mhandharbeni.submissiondua.R
+import com.mhandharbeni.submissiondua.*
 import com.mhandharbeni.submissiondua.R.array.league
 import com.mhandharbeni.submissiondua.adapter.TeamAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentTeamUI
@@ -24,11 +23,12 @@ import com.mhandharbeni.submissiondua.presenter.MainPresenter
 import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
 import org.jetbrains.anko.*
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.toast
 
-class FragmentTeam: Fragment(), MainView, AnkoLogger {
+class FragmentTeam: Fragment(), MainView {
     override fun showLoading() {
         swipeRefresh.post {
             swipeRefresh.isRefreshing = true
@@ -57,7 +57,6 @@ class FragmentTeam: Fragment(), MainView, AnkoLogger {
         swipeRefresh.isRefreshing = false
         listTeams.clear()
         data?.let { listTeams.addAll(it) }
-        info("Cek ${data?.size}")
         adapter.notifyDataSetChanged()
     }
 
@@ -68,14 +67,15 @@ class FragmentTeam: Fragment(), MainView, AnkoLogger {
     private var listTeams: MutableList<TeamsItem> = mutableListOf()
     private lateinit var presenter: MainPresenter
     private lateinit var adapter: TeamAdapter
-    //
+
     private lateinit var rvTeam: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
+    private lateinit var search: ImageView
     private lateinit var v:View
 
     private lateinit var liga:String
-    //
+
     private lateinit var request: ApiRepository
     private lateinit var gson: Gson
 
@@ -85,6 +85,7 @@ class FragmentTeam: Fragment(), MainView, AnkoLogger {
         rvTeam = v.find(R.id.rvTeam)
         swipeRefresh = v.find(R.id.swipeRefresh)
         spinner = v.find(R.id.spinner)
+        search = v.find(R.id.btnSearch)
 
         request = ApiRepository()
         gson = Gson()
@@ -108,6 +109,10 @@ class FragmentTeam: Fragment(), MainView, AnkoLogger {
             }
         }
 
+
+        search.onClick {
+            ctx.startActivity<SearchActivity>("search" to "TEAM")
+        }
 
         swipeRefresh.onRefresh {
             presenter.getTeam(liga)

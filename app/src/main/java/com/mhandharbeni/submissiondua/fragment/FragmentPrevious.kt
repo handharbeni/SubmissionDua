@@ -7,13 +7,17 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.Spinner
 import com.google.gson.Gson
 import com.mhandharbeni.submissiondua.BuildConfig
 import com.mhandharbeni.submissiondua.DetailActivity
 import com.mhandharbeni.submissiondua.R
+import com.mhandharbeni.submissiondua.SearchActivity
 import com.mhandharbeni.submissiondua.adapter.MainAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentPreviousUI
-import com.mhandharbeni.submissiondua.fragment.ui.FragmentUI
 import com.mhandharbeni.submissiondua.model.EventsItem
 import com.mhandharbeni.submissiondua.model.PlayerItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
@@ -22,6 +26,7 @@ import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
+import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
@@ -50,10 +55,14 @@ class FragmentPrevious: Fragment(), MainView {
     private lateinit var rvScore: RecyclerView
     //    private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var spinner: Spinner
+    private lateinit var search: ImageView
     private lateinit var v:View
 
     private lateinit var request: ApiRepository
     private lateinit var gson: Gson
+
+    private lateinit var idLeague:String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = FragmentPreviousUI<FragmentPrevious>().createView(AnkoContext.create(ctx, this))
@@ -61,6 +70,8 @@ class FragmentPrevious: Fragment(), MainView {
         rvScore = v.find(R.id.rvScorePrevious)
 //        progressBar = v.find(R.id.progressBar)
         swipeRefresh = v.find(R.id.swipeRefresh)
+        spinner = v.find(R.id.spinner)
+        search = v.find(R.id.btnSearch)
 
         request = ApiRepository()
         gson = Gson()
@@ -70,11 +81,33 @@ class FragmentPrevious: Fragment(), MainView {
         adapter = MainAdapter(listFixtures){partItem:EventsItem?->clickFixtures(partItem)}
         rvScore.adapter = adapter
 
+        val spinnerItems = resources.getStringArray(R.array.league)
+        val  spinnerAdapter = ArrayAdapter(ctx, android.R.layout.simple_spinner_dropdown_item, spinnerItems)
+        spinner.adapter = spinnerAdapter
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                when (spinner.selectedItemPosition){
+                    0 -> idLeague = "4328"
+                    1 -> idLeague = "4331"
+                    2 -> idLeague = "4332"
+                    3 -> idLeague = "4334"
+                    else -> idLeague = "4335"
+                }
+                presenter.getFixturesList(BuildConfig.PREVIOUS, idLeague)
+            }
+        }
+
+        search.onClick {
+            ctx.startActivity<SearchActivity>("search" to "EVENT")
+        }
 
         swipeRefresh.onRefresh {
-            presenter.getFixturesList(BuildConfig.PREVIOUS)
+            presenter.getFixturesList(BuildConfig.PREVIOUS,idLeague)
         }
-        presenter.getFixturesList(BuildConfig.PREVIOUS)
+
         return v
     }
     override fun showLoading() {

@@ -45,4 +45,6 @@
     <item name="frameTeam" type="id" />
     <item name="tabTeam" type="id" />
     <item name="txtOverview" type="id" />
+    <item name="rvPlayer" type="id" />
+    <item name="btnSearch" type="id" />
 </resources>
