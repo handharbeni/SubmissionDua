@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.find
-import org.jetbrains.anko.info
 
 class TeamAdapter (private val teams: List<TeamsItem>, private val clickListener: (TeamsItem?) -> Unit) : RecyclerView.Adapter<ViewHolder>(), AnkoLogger{
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,14 +26,14 @@ class TeamAdapter (private val teams: List<TeamsItem>, private val clickListener
 
 }
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    private val ItemCvParent: CardView = view.find(R.id.ItemCvParent)
-    private val ItemTxtNama: TextView = view.find(R.id.ItemTxtNama)
-    private val ItemIvLogo: ImageView = view.find(R.id.ItemIvLogo)
+    private val itemCvParent: CardView = view.find(R.id.ItemCvParent)
+    private val itemTxtNama: TextView = view.find(R.id.ItemTxtNama)
+    private val itemIvLogo: ImageView = view.find(R.id.ItemIvLogo)
 
     fun bindItem(teams: TeamsItem?, clickListener: (TeamsItem?) -> Unit) {
-        ItemTxtNama.text = teams?.strTeam
-        Picasso.get().load(teams?.strTeamBadge).into(ItemIvLogo)
-        ItemCvParent.setOnClickListener {
+        itemTxtNama.text = teams?.strTeam
+        Picasso.get().load(teams?.strTeamBadge).into(itemIvLogo)
+        itemCvParent.setOnClickListener {
             clickListener(teams)
         }
     }

@@ -36,15 +36,14 @@ class MainPresenterTest {
     fun getMatchList(){
         val events:MutableList<EventsItem> = mutableListOf()
         val response = Response(events)
-        `when`(gson.fromJson(apiRepository.doRequest(TheSportDBApi.getFixtures(BuildConfig.NEXT)),
+        `when`(gson.fromJson(apiRepository.doRequest(TheSportDBApi.getFixtures(BuildConfig.NEXT, "4328")),
                 Response::class.java
         )).thenReturn(response)
 
-        presenter.getFixturesList(BuildConfig.NEXT)
+        presenter.getFixturesList(BuildConfig.NEXT, "4328")
 
         verify(view).showLoading()
         verify(view).showFixtures(events)
-        verify(view).hideLoading()
     }
 
 }

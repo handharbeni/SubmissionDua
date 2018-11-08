@@ -3,22 +3,14 @@ package com.mhandharbeni.submissiondua.presenter
 import com.google.gson.Gson
 import com.mhandharbeni.submissiondua.model.PlayerResponse
 import com.mhandharbeni.submissiondua.model.Response
-import com.mhandharbeni.submissiondua.model.TeamDetail
 import com.mhandharbeni.submissiondua.model.TeamResponse
-import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import com.mhandharbeni.submissiondua.model.sqlite.SearchResponse
-import com.mhandharbeni.submissiondua.model.sqlite.SqliteFavourite
 import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.CoroutineContextProvider
 import com.mhandharbeni.submissiondua.tools.MainView
 import com.mhandharbeni.submissiondua.tools.TheSportDBApi
-import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.coroutines.experimental.bg
-import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.parseList
-import org.jetbrains.anko.db.select
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MainPresenter(private val view: MainView,
                     private val apiRepository: ApiRepository?,
@@ -27,7 +19,7 @@ class MainPresenter(private val view: MainView,
 
     fun getFixturesList(state: String?, league:String?) {
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getFixtures(state, league)), Response::class.java)
             }
@@ -39,7 +31,7 @@ class MainPresenter(private val view: MainView,
 
     fun getDetailFixtures(id: String?) {
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getFixturesDetail(id)), Response::class.java)
             }
@@ -49,9 +41,9 @@ class MainPresenter(private val view: MainView,
         }
     }
 
-    fun getTeamDetail(id: String?, status: String){
+    fun getTeamDetail(id: String?){
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeamDetail(id)), TeamResponse::class.java)
             }
@@ -63,7 +55,7 @@ class MainPresenter(private val view: MainView,
 
     fun getTeam(liga: String?){
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeam(liga)), TeamResponse::class.java)
             }
@@ -75,7 +67,7 @@ class MainPresenter(private val view: MainView,
 
     fun getDetailTeam(id: String?){
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeamDetail(id)), TeamResponse::class.java)
             }
@@ -87,7 +79,7 @@ class MainPresenter(private val view: MainView,
 
     fun getPlayer(team: String?){
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getPlayer(team)), PlayerResponse::class.java)
             }
@@ -99,7 +91,7 @@ class MainPresenter(private val view: MainView,
 
     fun getFixturesSearch(search: String?){
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getFixturesSearch(search)), SearchResponse::class.java)
             }
@@ -111,7 +103,7 @@ class MainPresenter(private val view: MainView,
 
     fun getTeamSearch(search: String?){
         view.showLoading()
-        async(context.main) {
+        launch(context.main) {
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getTeamSearch(search)), TeamResponse::class.java)
             }

@@ -33,19 +33,15 @@ class FragmentPlayer : Fragment(), MainView {
     }
 
     override fun showFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showTeams(data: List<TeamsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {

@@ -20,7 +20,10 @@ class FragmentPreviousUI<T>: AnkoComponent<T> {
                 setImageResource(R.drawable.ic_search)
                 backgroundTintMode = PorterDuff.Mode.SRC
             }.lparams(width = wrapContent, height = wrapContent) {
-                gravity = Gravity.TOP
+                alignParentBottom()
+                alignParentRight()
+                gravity = Gravity.BOTTOM
+                gravity = Gravity.END
                 margin = dip(5)
             }
             linearLayout {

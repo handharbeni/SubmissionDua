@@ -7,18 +7,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mhandharbeni.submissiondua.BuildConfig
-import com.mhandharbeni.submissiondua.DetailActivity
 import com.mhandharbeni.submissiondua.DetailTeamActivity
 import com.mhandharbeni.submissiondua.R
-import com.mhandharbeni.submissiondua.adapter.FavouriteAdapter
 import com.mhandharbeni.submissiondua.adapter.FavouriteTeamAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentFavouriteUI
-import com.mhandharbeni.submissiondua.fragment.ui.FragmentUI
 import com.mhandharbeni.submissiondua.model.EventsItem
 import com.mhandharbeni.submissiondua.model.PlayerItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
-import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import com.mhandharbeni.submissiondua.model.sqlite.SqliteFavourite
 import com.mhandharbeni.submissiondua.model.sqlite.TeamFavouriteTable
 import com.mhandharbeni.submissiondua.presenter.MainPresenter
@@ -30,19 +25,15 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.toast
 
 class FragmentTeamFavourite: Fragment(), MainView {
     override fun showTeams(data: List<TeamsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showFixtures(data: List<EventsItem>?) {
@@ -85,6 +76,15 @@ class FragmentTeamFavourite: Fragment(), MainView {
     private fun showFavourite() {
         listFavourite.clear()
         database?.use {
+//            createTable(TeamFavouriteTable.TABLE_NAME, true,
+//                    TeamFavouriteTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+//                    TeamFavouriteTable.FIELD_ID_TEAM to TEXT + UNIQUE,
+//                    TeamFavouriteTable.FIELD_TITLE_TEAM to TEXT,
+//                    TeamFavouriteTable.FIELD_LOGO_TEAM to TEXT,
+//                    TeamFavouriteTable.FIELD_FORMED_YEAR to TEXT,
+//                    TeamFavouriteTable.FIELD_STADIUM to TEXT,
+//                    TeamFavouriteTable.FIELD_DESKRIPSI to TEXT)
+
             swipeRefresh.isRefreshing = false
             val result = select(TeamFavouriteTable.TABLE_NAME)
             val favorite = result.parseList(classParser<TeamFavouriteTable>())

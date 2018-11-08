@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.mhandharbeni.submissiondua.R
-import com.mhandharbeni.submissiondua.fragment.ui.FixtureUI
 import com.mhandharbeni.submissiondua.fragment.ui.TeamUI
-import com.mhandharbeni.submissiondua.model.EventsItem
-import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import com.mhandharbeni.submissiondua.model.sqlite.TeamFavouriteTable
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.AnkoContext
@@ -30,15 +27,15 @@ class FavouriteTeamAdapter(private val favourite: List<TeamFavouriteTable>, priv
 
 }
 class TeamFavViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    private val ItemCvParent: CardView = view.find(R.id.ItemCvParent)
-    private val ItemTxtNama: TextView = view.find(R.id.ItemTxtNama)
-    private val ItemIvLogo: ImageView = view.find(R.id.ItemIvLogo)
+    private val itemCvParent: CardView = view.find(R.id.ItemCvParent)
+    private val itemTxtNama: TextView = view.find(R.id.ItemTxtNama)
+    private val itemIvLogo: ImageView = view.find(R.id.ItemIvLogo)
 
     fun bindItem(teams: TeamFavouriteTable?, clickListener: (TeamFavouriteTable?) -> Unit) {
 //        Picasso.get().load(teams.teamBadge).into(teamBadge)
-        ItemTxtNama.text = teams?.titleTeam
-        Picasso.get().load(teams?.logoTeam).into(ItemIvLogo)
-        ItemCvParent.setOnClickListener {
+        itemTxtNama.text = teams?.titleTeam
+        Picasso.get().load(teams?.logoTeam).into(itemIvLogo)
+        itemCvParent.setOnClickListener {
             clickListener(teams)
         }
     }

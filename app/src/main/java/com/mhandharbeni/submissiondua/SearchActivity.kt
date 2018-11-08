@@ -32,11 +32,9 @@ class SearchActivity : AppCompatActivity(), MainView, AnkoLogger {
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showTeams(data: List<TeamsItem>?) {
@@ -47,7 +45,6 @@ class SearchActivity : AppCompatActivity(), MainView, AnkoLogger {
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private lateinit var presenter: MainPresenter

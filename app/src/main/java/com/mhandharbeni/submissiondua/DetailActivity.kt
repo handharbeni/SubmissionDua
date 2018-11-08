@@ -1,7 +1,6 @@
 package com.mhandharbeni.submissiondua
 
 import android.content.Context
-import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -26,15 +25,12 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
     override fun showTeams(data: List<TeamsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
@@ -157,6 +153,10 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
         }
     }
     private fun initDataFromEvent(eventsItem: EventsItem){
+
+        getHomeTeam(eventsItem.idHomeTeam)
+        getAwayTeam(eventsItem.idAwayTeam)
+
         detailTxtHome.text = eventsItem.strHomeTeam
         detailTxtAway.text = eventsItem.strAwayTeam
 
@@ -182,10 +182,6 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
         detailLUGKMildfielderAway.text = eventsItem.strAwayLineupMid?.replace(";", "\n")
         detailLUGKForwardsAway.text = eventsItem.strAwayLineupForward?.replace(";", "\n")
         detailLUGKSubstituesAway.text = eventsItem.strAwayLineupSubstitutes?.replace(";", "\n")
-        getHomeTeam()
-        getAwayTeam()
-
-
     }
     private fun initDataFromFavourite(){
 
@@ -197,12 +193,12 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
 
     }
 
-    private fun getHomeTeam(){
-        presenter?.getTeamDetail(eventsItem.idHomeTeam, "home")
+    private fun getHomeTeam(id: String?){
+        presenter?.getTeamDetail(id)
     }
 
-    private fun getAwayTeam(){
-        presenter?.getTeamDetail(eventsItem.idAwayTeam, "away")
+    private fun getAwayTeam(id: String?){
+        presenter?.getTeamDetail(id)
     }
 
     private fun getFavourite(){
@@ -245,7 +241,7 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
                         FavouriteTable.FIELD_SCORE_HOME to "${eventsItem.intHomeScore}",
                         FavouriteTable.FIELD_SCORE_AWAY to "${eventsItem.intAwayScore}" )
             }
-        } catch (e: SQLiteConstraintException){
+        } catch (e: Exception){
 
         }
     }
@@ -255,7 +251,7 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
             database.use {
                 delete(FavouriteTable.TABLE_NAME, "(ID_FIXTURES = {id})", "id" to idEvent)
             }
-        } catch (e: SQLiteConstraintException){
+        } catch (e: Exception){
 
         }
     }

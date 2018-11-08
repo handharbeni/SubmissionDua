@@ -21,7 +21,6 @@ import com.mhandharbeni.submissiondua.fragment.ui.FragmentUI
 import com.mhandharbeni.submissiondua.model.EventsItem
 import com.mhandharbeni.submissiondua.model.PlayerItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
-import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import com.mhandharbeni.submissiondua.presenter.MainPresenter
 import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
@@ -35,15 +34,12 @@ import org.jetbrains.anko.support.v4.toast
 
 class FragmentNext: Fragment(), MainView {
     override fun showTeams(data: List<TeamsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
@@ -89,12 +85,12 @@ class FragmentNext: Fragment(), MainView {
             }
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                when (spinner.selectedItemPosition){
-                    0 -> idLeague = "4328"
-                    1 -> idLeague = "4331"
-                    2 -> idLeague = "4332"
-                    3 -> idLeague = "4334"
-                    else -> idLeague = "4335"
+                idLeague = when (spinner.selectedItemPosition){
+                    0 -> "4328"
+                    1 -> "4331"
+                    2 -> "4332"
+                    3 -> "4334"
+                    else -> "4335"
                 }
                 presenter.getFixturesList(BuildConfig.NEXT, idLeague)
             }

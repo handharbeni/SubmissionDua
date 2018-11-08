@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.mhandharbeni.submissiondua.R
 import com.mhandharbeni.submissiondua.fragment.ui.FixtureUI
-import com.mhandharbeni.submissiondua.model.EventsItem
 import com.mhandharbeni.submissiondua.model.sqlite.FavouriteTable
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
@@ -26,26 +25,26 @@ class FavouriteAdapter(private val favourite: List<FavouriteTable>, private val 
 
 }
 class FavouriteTeamViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    private val ItemCvParent: CardView = view.find(R.id.ItemCvParent)
-    private val ItemTxtTanggal: TextView = view.find(R.id.ItemTxtTanggal)
-    private val ItemTxtHome: TextView = view.find(R.id.ItemTxtHome)
-    private val ItemTxtHomeScore: TextView = view.find(R.id.ItemTxtHomeScore)
-    private val ItemTxtAway: TextView = view.find(R.id.ItemTxtAway)
-    private val ItemTxtAwayScore: TextView = view.find(R.id.ItemTxtAwayScore)
+    private val itemCvParent: CardView = view.find(R.id.ItemCvParent)
+    private val itemTxtTanggal: TextView = view.find(R.id.ItemTxtTanggal)
+    private val itemTxtHome: TextView = view.find(R.id.ItemTxtHome)
+    private val itemTxtHomeScore: TextView = view.find(R.id.ItemTxtHomeScore)
+    private val itemTxtAway: TextView = view.find(R.id.ItemTxtAway)
+    private val itemTxtAwayScore: TextView = view.find(R.id.ItemTxtAwayScore)
 
     fun bindItem(teams: FavouriteTable?, clickListener: (FavouriteTable?) -> Unit) {
 //        Picasso.get().load(teams.teamBadge).into(teamBadge)
-        ItemTxtTanggal.text = teams?.date
-        ItemTxtHome.text = teams?.titleHome
-        ItemTxtAway.text = teams?.titleAway
+        itemTxtTanggal.text = teams?.date
+        itemTxtHome.text = teams?.titleHome
+        itemTxtAway.text = teams?.titleAway
         if (!teams?.scoreHome.equals("null")){
-            ItemTxtHomeScore.text = teams?.scoreHome
-            ItemTxtAwayScore.text = teams?.scoreAway
+            itemTxtHomeScore.text = teams?.scoreHome
+            itemTxtAwayScore.text = teams?.scoreAway
         } else {
-            ItemTxtHomeScore.text = ""
-            ItemTxtAwayScore.text = ""
+            itemTxtHomeScore.text = ""
+            itemTxtAwayScore.text = ""
         }
-        ItemCvParent.setOnClickListener {
+        itemCvParent.setOnClickListener {
             clickListener(teams)
         }
     }

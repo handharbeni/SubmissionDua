@@ -23,21 +23,21 @@ class MainAdapter (private val fixtures: List<EventsItem>, private val clickList
 
 }
 class TeamViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    private val ItemCvParent: CardView = view.find(R.id.ItemCvParent)
-    private val ItemTxtTanggal: TextView = view.find(R.id.ItemTxtTanggal)
-    private val ItemTxtHome: TextView = view.find(R.id.ItemTxtHome)
-    private val ItemTxtHomeScore: TextView = view.find(R.id.ItemTxtHomeScore)
-    private val ItemTxtAway: TextView = view.find(R.id.ItemTxtAway)
-    private val ItemTxtAwayScore: TextView = view.find(R.id.ItemTxtAwayScore)
+    private val itemCvParent: CardView = view.find(R.id.ItemCvParent)
+    private val itemTxtTanggal: TextView = view.find(R.id.ItemTxtTanggal)
+    private val itemTxtHome: TextView = view.find(R.id.ItemTxtHome)
+    private val itemTxtHomeScore: TextView = view.find(R.id.ItemTxtHomeScore)
+    private val itemTxtAway: TextView = view.find(R.id.ItemTxtAway)
+    private val itemTxtAwayScore: TextView = view.find(R.id.ItemTxtAwayScore)
 
     fun bindItem(teams: EventsItem?, clickListener: (EventsItem?) -> Unit) {
 //        Picasso.get().load(teams.teamBadge).into(teamBadge)
-        ItemTxtTanggal.text = teams?.strDate
-        ItemTxtHome.text = teams?.strHomeTeam
-        ItemTxtAway.text = teams?.strAwayTeam
-        ItemTxtHomeScore.text = teams?.intHomeScore
-        ItemTxtAwayScore.text = teams?.intAwayScore
-        ItemCvParent.setOnClickListener {
+        itemTxtTanggal.text = teams?.strDate
+        itemTxtHome.text = teams?.strHomeTeam
+        itemTxtAway.text = teams?.strAwayTeam
+        itemTxtHomeScore.text = teams?.intHomeScore
+        itemTxtAwayScore.text = teams?.intAwayScore
+        itemCvParent.setOnClickListener {
             clickListener(teams)
         }
     }

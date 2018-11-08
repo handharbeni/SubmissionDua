@@ -7,12 +7,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mhandharbeni.submissiondua.BuildConfig
 import com.mhandharbeni.submissiondua.DetailActivity
 import com.mhandharbeni.submissiondua.R
 import com.mhandharbeni.submissiondua.adapter.FavouriteAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentFavouriteUI
-import com.mhandharbeni.submissiondua.fragment.ui.FragmentUI
 import com.mhandharbeni.submissiondua.model.EventsItem
 import com.mhandharbeni.submissiondua.model.PlayerItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
@@ -27,19 +25,15 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.toast
 
 class FragmentFavourite: Fragment(), MainView {
     override fun showTeams(data: List<TeamsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showFixtures(data: List<EventsItem>?) {

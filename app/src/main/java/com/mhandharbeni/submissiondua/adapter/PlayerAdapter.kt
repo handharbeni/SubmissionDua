@@ -7,16 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.mhandharbeni.submissiondua.R
-import com.mhandharbeni.submissiondua.fragment.ui.FixtureUI
 import com.mhandharbeni.submissiondua.fragment.ui.PlayerUI
-import com.mhandharbeni.submissiondua.fragment.ui.TeamUI
 import com.mhandharbeni.submissiondua.model.PlayerItem
-import com.mhandharbeni.submissiondua.model.TeamsItem
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.find
-import org.jetbrains.anko.info
 
 class PlayerAdapter (private val players: List<PlayerItem>, private val clickListener: (PlayerItem?) -> Unit) : RecyclerView.Adapter<PlayerViewHolder>(){
 
@@ -34,14 +29,14 @@ class PlayerAdapter (private val players: List<PlayerItem>, private val clickLis
 
 }
 class PlayerViewHolder(view: View) :RecyclerView.ViewHolder(view){
-    private val ItemCvParent: CardView = view.find(R.id.ItemCvParent)
-    private val ItemTxtNama: TextView = view.find(R.id.ItemTxtNama)
-    private val ItemIvLogo: ImageView = view.find(R.id.ItemIvLogo)
+    private val itemCvParent: CardView = view.find(R.id.ItemCvParent)
+    private val itemTxtNama: TextView = view.find(R.id.ItemTxtNama)
+    private val itemIvLogo: ImageView = view.find(R.id.ItemIvLogo)
 
     fun bindItem(players: PlayerItem?, clickListener: (PlayerItem?) -> Unit) {
-        ItemTxtNama.text = players?.namePlayer
-        Picasso.get().load(players?.profil).into(ItemIvLogo)
-        ItemCvParent.setOnClickListener {
+        itemTxtNama.text = players?.namePlayer
+        Picasso.get().load(players?.profil).into(itemIvLogo)
+        itemCvParent.setOnClickListener {
             clickListener(players)
         }
     }

@@ -40,7 +40,6 @@
     <item name="ivLogoTeam" type="id" />
     <item name="ItemTxtTahun" type="id" />
     <item name="ItemTxtStadium" type="id" />
-    <item name="tabs" type="id" />
     <item name="viewPager" type="id" />
     <item name="frameTeam" type="id" />
     <item name="tabTeam" type="id" />

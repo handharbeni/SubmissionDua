@@ -11,7 +11,7 @@ class TeamPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0       -> FragmentOverview()
-            else       -> FragmentPlayer()
+            else    -> FragmentPlayer()
         }
     }
 
@@ -22,7 +22,7 @@ class TeamPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
             0       -> "Overview"
-            else       -> "Player"
+            else    -> "Player"
         }
     }
 }

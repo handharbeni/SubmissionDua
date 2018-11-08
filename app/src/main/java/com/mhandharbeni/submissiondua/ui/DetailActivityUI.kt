@@ -13,12 +13,12 @@ class DetailActivityUI<T>: AnkoComponent<T> {
     override fun createView(ui: AnkoContext<T>) = with(ui) {
         relativeLayout {
             floatingActionButton {
-//                alignPar
-                translationY = -15.0f
                 id = R.id.btnFavourite
                 setImageResource(R.drawable.ic_unfavourite)
                 backgroundTintMode = PorterDuff.Mode.SRC
             }.lparams(width= wrapContent, height = wrapContent){
+                alignParentBottom()
+                alignParentRight()
                 gravity=Gravity.BOTTOM
                 margin=dip(5)
             }
@@ -34,6 +34,7 @@ class DetailActivityUI<T>: AnkoComponent<T> {
                         linearLayout {
                             orientation = LinearLayout.VERTICAL
                             imageView {
+                                setImageResource(R.drawable.ic_football)
                                 id = R.id.DetailIMGHome
                                 padding = dip(5)
                                 this@linearLayout.gravity = Gravity.RIGHT
@@ -61,6 +62,7 @@ class DetailActivityUI<T>: AnkoComponent<T> {
                         linearLayout {
                             orientation = LinearLayout.VERTICAL
                             imageView {
+                                setImageResource(R.drawable.ic_football)
                                 id = R.id.DetailIMGAway
                                 padding = dip(5)
                             }.lparams(width= matchParent, height = wrapContent)

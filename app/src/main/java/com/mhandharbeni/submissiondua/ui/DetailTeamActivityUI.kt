@@ -19,13 +19,12 @@ class DetailTeamActivityUI<T>: AnkoComponent<T> {
     override fun createView(ui: AnkoContext<T>) = with(ui) {
         relativeLayout {
             floatingActionButton {
-//                alignPar
-                translationY = -15.0f
                 id = R.id.btnFavourite
                 setImageResource(R.drawable.ic_unfavourite)
                 backgroundTintMode = PorterDuff.Mode.SRC
             }.lparams(width= wrapContent, height = wrapContent){
-                gravity=Gravity.TOP
+                alignParentBottom()
+                alignParentRight()
                 margin=dip(5)
             }
             scrollView{

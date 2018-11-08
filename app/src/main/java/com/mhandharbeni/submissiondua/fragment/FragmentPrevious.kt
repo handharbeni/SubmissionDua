@@ -33,15 +33,12 @@ import org.jetbrains.anko.support.v4.onRefresh
 
 class FragmentPrevious: Fragment(), MainView {
     override fun showTeams(data: List<TeamsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
@@ -53,7 +50,6 @@ class FragmentPrevious: Fragment(), MainView {
     private lateinit var adapter: MainAdapter
 
     private lateinit var rvScore: RecyclerView
-    //    private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var spinner: Spinner
     private lateinit var search: ImageView
@@ -68,7 +64,6 @@ class FragmentPrevious: Fragment(), MainView {
         v = FragmentPreviousUI<FragmentPrevious>().createView(AnkoContext.create(ctx, this))
 
         rvScore = v.find(R.id.rvScorePrevious)
-//        progressBar = v.find(R.id.progressBar)
         swipeRefresh = v.find(R.id.swipeRefresh)
         spinner = v.find(R.id.spinner)
         search = v.find(R.id.btnSearch)

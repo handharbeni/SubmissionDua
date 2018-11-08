@@ -12,8 +12,10 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Spinner
 import com.google.gson.Gson
-import com.mhandharbeni.submissiondua.*
+import com.mhandharbeni.submissiondua.DetailTeamActivity
+import com.mhandharbeni.submissiondua.R
 import com.mhandharbeni.submissiondua.R.array.league
+import com.mhandharbeni.submissiondua.SearchActivity
 import com.mhandharbeni.submissiondua.adapter.TeamAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentTeamUI
 import com.mhandharbeni.submissiondua.model.EventsItem
@@ -22,11 +24,12 @@ import com.mhandharbeni.submissiondua.model.TeamsItem
 import com.mhandharbeni.submissiondua.presenter.MainPresenter
 import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.onRefresh
-import org.jetbrains.anko.support.v4.toast
 
 class FragmentTeam: Fragment(), MainView {
     override fun showLoading() {
@@ -42,15 +45,12 @@ class FragmentTeam: Fragment(), MainView {
     }
 
     override fun showFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showTeams(data: List<TeamsItem>?) {
@@ -61,7 +61,6 @@ class FragmentTeam: Fragment(), MainView {
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private var listTeams: MutableList<TeamsItem> = mutableListOf()

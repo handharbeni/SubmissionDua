@@ -2,15 +2,10 @@ package com.mhandharbeni.submissiondua.fragment.ui
 
 import android.graphics.PorterDuff
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Gravity
 import android.widget.LinearLayout
 import com.mhandharbeni.submissiondua.R
 import com.mhandharbeni.submissiondua.R.color.colorAccent
 import org.jetbrains.anko.*
-import org.jetbrains.anko.appcompat.v7.toolbar
-import org.jetbrains.anko.design.appBarLayout
-import org.jetbrains.anko.design.collapsingToolbarLayout
-import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
@@ -25,7 +20,8 @@ class FragmentUI<T> : AnkoComponent<T> {
                 setImageResource(R.drawable.ic_search)
                 backgroundTintMode = PorterDuff.Mode.SRC
             }.lparams(width = wrapContent, height = wrapContent) {
-                gravity = Gravity.TOP
+                alignParentBottom()
+                alignParentRight()
                 margin = dip(5)
             }
             linearLayout {

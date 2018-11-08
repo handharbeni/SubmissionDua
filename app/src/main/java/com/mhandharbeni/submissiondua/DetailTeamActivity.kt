@@ -23,10 +23,7 @@ import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
 import com.mhandharbeni.submissiondua.ui.DetailTeamActivityUI
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.delete
-import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.db.select
+import org.jetbrains.anko.db.*
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.setContentView
@@ -39,15 +36,12 @@ class DetailTeamActivity : AppCompatActivity(), MainView {
     }
 
     override fun showFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showLastFixtures(data: List<EventsItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showTeams(data: List<TeamsItem>?) {
@@ -57,7 +51,6 @@ class DetailTeamActivity : AppCompatActivity(), MainView {
     }
 
     override fun showPlayer(data: List<PlayerItem>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private val Context.database : SqliteFavourite get() = SqliteFavourite.getInstance(applicationContext)
