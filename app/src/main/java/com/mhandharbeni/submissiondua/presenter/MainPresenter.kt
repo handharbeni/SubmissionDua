@@ -1,5 +1,6 @@
 package com.mhandharbeni.submissiondua.presenter
 
+import android.util.Log
 import com.google.gson.Gson
 import com.mhandharbeni.submissiondua.model.PlayerResponse
 import com.mhandharbeni.submissiondua.model.Response
@@ -19,7 +20,7 @@ class MainPresenter(private val view: MainView,
 
     fun getFixturesList(state: String?, league:String?) {
         view.showLoading()
-        launch(context.main) {
+        launch(context.main){
             val data = bg {
                 gson?.fromJson(apiRepository?.doRequest(TheSportDBApi.getFixtures(state, league)), Response::class.java)
             }
@@ -41,7 +42,9 @@ class MainPresenter(private val view: MainView,
         }
     }
 
-    fun getTeamDetail(id: String?){
+    fun getTeamDetail(id: String?, status: String?){
+        Log.i("GET TEAM HOME", "ID = $id")
+
         view.showLoading()
         launch(context.main) {
             val data = bg {
@@ -49,7 +52,8 @@ class MainPresenter(private val view: MainView,
             }
 
             view.hideLoading()
-            view.showTeams(data.await()?.teams)
+            view.showDetail(data.await()?.teams, status!!)
+//            view.showTeams(data.await()?.teams)
         }
     }
 

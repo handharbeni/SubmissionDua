@@ -117,7 +117,6 @@ class FragmentNext: Fragment(), MainView {
         }
     }
     override fun showFixtures(data: List<EventsItem>?) {
-//        hideLoading()
         listFixtures.clear()
         data?.let { listFixtures.addAll(it) }
 
@@ -126,7 +125,7 @@ class FragmentNext: Fragment(), MainView {
     }
 
     private fun clickFixtures(eventsItem: EventsItem?){
-        toast("Pertandingan Belum Berlangsung!!")
+        toast(getString(R.string.belum_bertanding))
         ctx.startActivity<DetailActivity>("id" to eventsItem?.idEvent)
     }
 }

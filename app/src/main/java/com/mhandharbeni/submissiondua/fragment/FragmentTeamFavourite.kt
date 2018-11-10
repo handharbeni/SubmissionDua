@@ -11,6 +11,7 @@ import com.mhandharbeni.submissiondua.DetailTeamActivity
 import com.mhandharbeni.submissiondua.R
 import com.mhandharbeni.submissiondua.adapter.FavouriteTeamAdapter
 import com.mhandharbeni.submissiondua.fragment.ui.FragmentFavouriteUI
+import com.mhandharbeni.submissiondua.fragment.ui.FragmentFavouriteUITeam
 import com.mhandharbeni.submissiondua.model.EventsItem
 import com.mhandharbeni.submissiondua.model.PlayerItem
 import com.mhandharbeni.submissiondua.model.TeamsItem
@@ -53,10 +54,10 @@ class FragmentTeamFavourite: Fragment(), MainView {
     private val database: SqliteFavourite? get() = SqliteFavourite.getInstance(ctx)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        v = FragmentFavouriteUI<FragmentTeamFavourite>().createView(AnkoContext.create(ctx, this))
+        v = FragmentFavouriteUITeam<FragmentTeamFavourite>().createView(AnkoContext.create(ctx, this))
 
 
-        rvScore = v.find(R.id.rvScoreFavourite)
+        rvScore = v.find(R.id.rvScoreFavouriteTeam)
         swipeRefresh = v.find(R.id.swipeRefresh)
 
         presenter = MainPresenter(this, null, null)
@@ -76,15 +77,6 @@ class FragmentTeamFavourite: Fragment(), MainView {
     private fun showFavourite() {
         listFavourite.clear()
         database?.use {
-//            createTable(TeamFavouriteTable.TABLE_NAME, true,
-//                    TeamFavouriteTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-//                    TeamFavouriteTable.FIELD_ID_TEAM to TEXT + UNIQUE,
-//                    TeamFavouriteTable.FIELD_TITLE_TEAM to TEXT,
-//                    TeamFavouriteTable.FIELD_LOGO_TEAM to TEXT,
-//                    TeamFavouriteTable.FIELD_FORMED_YEAR to TEXT,
-//                    TeamFavouriteTable.FIELD_STADIUM to TEXT,
-//                    TeamFavouriteTable.FIELD_DESKRIPSI to TEXT)
-
             swipeRefresh.isRefreshing = false
             val result = select(TeamFavouriteTable.TABLE_NAME)
             val favorite = result.parseList(classParser<TeamFavouriteTable>())

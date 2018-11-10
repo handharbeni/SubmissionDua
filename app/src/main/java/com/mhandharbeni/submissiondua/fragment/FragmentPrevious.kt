@@ -84,12 +84,12 @@ class FragmentPrevious: Fragment(), MainView {
             }
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                when (spinner.selectedItemPosition){
-                    0 -> idLeague = "4328"
-                    1 -> idLeague = "4331"
-                    2 -> idLeague = "4332"
-                    3 -> idLeague = "4334"
-                    else -> idLeague = "4335"
+                idLeague = when (spinner.selectedItemPosition){
+                    0 -> "4328"
+                    1 -> "4331"
+                    2 -> "4332"
+                    3 -> "4334"
+                    else -> "4335"
                 }
                 presenter.getFixturesList(BuildConfig.PREVIOUS, idLeague)
             }

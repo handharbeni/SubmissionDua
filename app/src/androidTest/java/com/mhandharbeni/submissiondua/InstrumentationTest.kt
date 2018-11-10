@@ -9,7 +9,6 @@ import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.v7.widget.RecyclerView
 import com.mhandharbeni.submissiondua.R.id.btnFavourite
-import com.mhandharbeni.submissiondua.R.id.rvScore
 import org.junit.Rule
 import org.junit.Test
 
@@ -19,6 +18,74 @@ class InstrumentationTest{
 
     @Test
     fun testAppBehaviour() {
+        /*
+        * Menampilkan List RecyclerView
+        * Klik List Matches Tab Previous on First Position
+        * Klik Favourite
+        *
+        * Klik Bottom Tab Favorites
+        * Klik Match Favourite
+        * Klik First Position
+        * UnFavourite
+        *
+        * */
+
+        Thread.sleep(5000)
+        onView(withText("NEXT FIXTURES")).perform(click())
+        Thread.sleep(2000)
+        onView(withText("PREVIOUS FIXTURES")).perform(click())
+        Thread.sleep(2000)
+        onView(withId(R.id.rvScorePrevious)).check(matches(isDisplayed()))
+        Thread.sleep(2000)
+        onView(withId(R.id.rvScorePrevious)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        Thread.sleep(2000)
+        onView(withId(btnFavourite)).check(matches(isDisplayed()))
+        onView(withId(btnFavourite)).perform(click())
+        Thread.sleep(2000)
+        pressBack()
+
+        Thread.sleep(5000)
+        onView(withId(R.id.navigation_teams)).check(matches(isDisplayed()))
+        Thread.sleep(2000)
+        onView(withId(R.id.navigation_teams)).perform(click())
+        Thread.sleep(2000)
+        onView(withId(R.id.rvTeam)).check(matches(isDisplayed()))
+        Thread.sleep(2000)
+        onView(withId(R.id.rvTeam)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        Thread.sleep(2000)
+        onView(withId(btnFavourite)).check(matches(isDisplayed()))
+        onView(withId(btnFavourite)).perform(click())
+        Thread.sleep(2000)
+        pressBack()
+
+        Thread.sleep(1000)
+        onView(withId(R.id.navigation_favorite)).check(matches(isDisplayed()))
+        onView(withId(R.id.navigation_favorite)).perform(click())
+        Thread.sleep(5000)
+        onView(withText("MATCH FAVORITE")).perform(click())
+        Thread.sleep(2000)
+        onView(withId(R.id.rvScoreFavourite)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        Thread.sleep(2000)
+        onView(withId(btnFavourite)).check(matches(isDisplayed()))
+        onView(withId(btnFavourite)).perform(click())
+        Thread.sleep(2000)
+//        onView(withText("TEAM FAVORITE")).perform(click())
+//        Thread.sleep(2000)
+//        onView(withId(R.id.rvScoreFavouriteTeam)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+//        Thread.sleep(2000)
+//        onView(withId(btnFavourite)).check(matches(isDisplayed()))
+//        onView(withId(btnFavourite)).perform(click())
+//        Thread.sleep(2000)
+
+        pressBack()
+
+
+//        Thread.sleep(2000)
+//        onView(withId(R.id.btnSearch)).check(matches(isDisplayed()))
+//        onView(withId(R.id.btnSearch)).perform(click())
+//        Thread.sleep(2000)
+//        pressBack()
+
 //        /*
 //        1. Menampilkan list RecyclerView
 //        2. klik list pada teks Barcelona

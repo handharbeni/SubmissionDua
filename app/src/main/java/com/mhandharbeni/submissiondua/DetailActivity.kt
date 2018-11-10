@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
+import android.util.Log.i
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.gson.Gson
@@ -18,7 +19,9 @@ import com.mhandharbeni.submissiondua.tools.ApiRepository
 import com.mhandharbeni.submissiondua.tools.MainView
 import com.mhandharbeni.submissiondua.ui.DetailActivityUI
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.experimental.launch
 import org.jetbrains.anko.*
+import org.jetbrains.anko.coroutines.experimental.asReference
 import org.jetbrains.anko.db.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
@@ -34,6 +37,7 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
     }
 
     override fun showDetail(data: List<TeamsItem>?, status: String) {
+        i("DETAIL ACTIVITY", data?.get(0)?.strTeamBadge)
         when (status) {
             "home" -> {
                 Picasso.get().load(data?.get(0)?.strTeamBadge).into(detailImageHome)
@@ -154,9 +158,6 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
     }
     private fun initDataFromEvent(eventsItem: EventsItem){
 
-        getHomeTeam(eventsItem.idHomeTeam)
-        getAwayTeam(eventsItem.idAwayTeam)
-
         detailTxtHome.text = eventsItem.strHomeTeam
         detailTxtAway.text = eventsItem.strAwayTeam
 
@@ -182,6 +183,10 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
         detailLUGKMildfielderAway.text = eventsItem.strAwayLineupMid?.replace(";", "\n")
         detailLUGKForwardsAway.text = eventsItem.strAwayLineupForward?.replace(";", "\n")
         detailLUGKSubstituesAway.text = eventsItem.strAwayLineupSubstitutes?.replace(";", "\n")
+
+        getHomeTeam(eventsItem.idHomeTeam)
+        getAwayTeam(eventsItem.idAwayTeam)
+
     }
     private fun initDataFromFavourite(){
 
@@ -194,11 +199,11 @@ class DetailActivity: AppCompatActivity(), MainView, AnkoLogger{
     }
 
     private fun getHomeTeam(id: String?){
-        presenter?.getTeamDetail(id)
+        presenter?.getTeamDetail(id, "home")
     }
 
     private fun getAwayTeam(id: String?){
-        presenter?.getTeamDetail(id)
+        presenter?.getTeamDetail(id, "away")
     }
 
     private fun getFavourite(){

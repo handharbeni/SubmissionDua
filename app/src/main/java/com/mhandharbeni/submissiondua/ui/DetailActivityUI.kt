@@ -34,11 +34,11 @@ class DetailActivityUI<T>: AnkoComponent<T> {
                         linearLayout {
                             orientation = LinearLayout.VERTICAL
                             imageView {
-                                setImageResource(R.drawable.ic_football)
+//                                setImageResource(R.drawable.ic_football)
                                 id = R.id.DetailIMGHome
                                 padding = dip(5)
                                 this@linearLayout.gravity = Gravity.RIGHT
-                            }.lparams(width= matchParent, height = wrapContent)
+                            }.lparams(width= matchParent, height = dip(50))
                             textView ("HOME"){
                                 gravity = Gravity.RIGHT
                                 id = R.id.detailTXTHome
@@ -62,10 +62,10 @@ class DetailActivityUI<T>: AnkoComponent<T> {
                         linearLayout {
                             orientation = LinearLayout.VERTICAL
                             imageView {
-                                setImageResource(R.drawable.ic_football)
+//                                setImageResource(R.drawable.ic_football)
                                 id = R.id.DetailIMGAway
                                 padding = dip(5)
-                            }.lparams(width= matchParent, height = wrapContent)
+                            }.lparams(width= matchParent, height = dip(50))
                             textView ("HOME"){
                                 id = R.id.detailTXTAway
                                 padding = dip(5)
